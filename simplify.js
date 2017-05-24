@@ -12,8 +12,8 @@
 // square distance between 2 points
 function getSqDist(p1, p2) {
 
-    var dx = p1.latitude - p2.latitude,
-        dy = p1.longitude - p2.longitude;
+    var dx = p1[0] - p2[0],
+        dy = p1[1] - p2[1];
 
     return dx * dx + dy * dy;
 }
@@ -21,18 +21,18 @@ function getSqDist(p1, p2) {
 // square distance from a point to a segment
 function getSqSegDist(p, p1, p2) {
 
-    var x = p1.latitude,
-        y = p1.longitude,
-        dx = p2.latitude - x,
-        dy = p2.longitude - y;
+    var x = p1[0],
+        y = p1[1],
+        dx = p2[0] - x,
+        dy = p2[1] - y;
 
     if (dx !== 0 || dy !== 0) {
 
-        var t = ((p.latitude - x) * dx + (p.longitude - y) * dy) / (dx * dx + dy * dy);
+        var t = ((p[0] - x) * dx + (p[1] - y) * dy) / (dx * dx + dy * dy);
 
         if (t > 1) {
-            x = p2.latitude;
-            y = p2.longitude;
+            x = p2[0];
+            y = p2[1];
 
         } else if (t > 0) {
             x += dx * t;
@@ -40,8 +40,8 @@ function getSqSegDist(p, p1, p2) {
         }
     }
 
-    dx = p.latitude - x;
-    dy = p.longitude - y;
+    dx = p[0] - x;
+    dy = p[1] - y;
 
     return dx * dx + dy * dy;
 }
